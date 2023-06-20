@@ -2,38 +2,85 @@
 <html>
 <head>
     <title>Fatigue Prediction</title>
+    <style>
+        body {
+            background-color: #0E2954;
+            color: white;
+            text-align: center;
+            font-family: Century Gothic, sans-serif;
+        }
 
+        h1 {
+            margin-top: 50px;
+            color: #FFF1DC;
+        }
 
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .input-container {
+            margin-bottom: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        select {
+            padding: 3px;
+            background-color: #D7C0AE;
+            color: #0E2954;
+            font-family: Century Gothic, sans-serif;
+        }
+
+        .card {
+            background-color: #E6CBA8;
+            padding: 10px;
+            width: 200px;
+            margin-top: 25px;
+        }
+
+        #predictionResult {
+            margin-top: 25px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <h1>Fatigue Prediction</h1>
-    
-    <form action="/predict" method="POST">
+    <h1>FATIGUE PREDICTION</h1>
+
+    <div class="container">
         <div class="input-container">
             <label for="heartRate">Heart Rate:</label>
-            <input type="text" name="hear_rate" value="{{ hear_rate_value }}" >
+            <input type="text" name="hear_rate" required value="{{ hear_rate_value }}">
         </div>
-        
+
         <div class="input-container">
             <label for="restingHeartRate">Resting Heart Rate:</label>
-            <input type="text" name="resting_heart" value="{{ resting_heart_value }}" >
+            <input type="text" name="resting_heart" required value="{{ resting_heart_value }}">
         </div>
-        
+
         <div class="input-container">
             <label for="bmi">BMI:</label>
-            <input type="text" name="BMI" step="0.01" required value="{{ calories_value }}">
+            <input type="text" name="BMI" step="0.01" required value="{{ BMI_value }}">
         </div>
-        
+
         <div class="input-container">
             <label for="calories">Calories:</label>
-            <input type="text" name="calories" value="{{ calories_value }}" >
+            <input type="text" name="calories" required value="{{ calories_value }}">
         </div>
-        
+
         <div class="input-container">
             <label for="age">Age:</label>
-            <input type="text" name="age" value="{{ age_value }}" >
+            <input type="text" name="age" required value="{{ age_value }}">
         </div>
-        
+
         <div class="input-container">
             <label for="gender">Gender:</label>
             <select name="gender">
@@ -41,17 +88,19 @@
                 <option value="1">Female</option>
             </select>
         </div>
-        
-        <button type="submit" id="predictBtn">Predict</button>
-        
-        <div id="predictionResult" class="hidden">
-            <h2>Prediction Result: {{prediction_text}}</h2>
-            <p id="fasScore"></p>
-            <p id="fatigueLevel"></p>
-        </div>
-    </form>
-   
+    </div>
+
+    <div class="card">
+        <p>Name: John Doe</p>
+    </div>
+
+    <button type="submit" id="predictBtn">Predict</button>
+
+    <div id="predictionResult" class="hidden">
+        <h2>Prediction Result: {{prediction_text}}</h2>
+        <p id="fasScore"></p>
+        <p id="fatigueLevel"></p>
+    </div>
+
 </body>
 </html>
-
-
