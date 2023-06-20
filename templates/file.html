@@ -1,106 +1,252 @@
+
+
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Fatigue Prediction</title>
     <style>
-        body {
-            background-color: #0E2954;
-            color: white;
-            text-align: center;
-            font-family: Century Gothic, sans-serif;
-        }
+      body {
+        background-color: #0e2954;
+        color: white;
+        text-align: center;
+        font-family: Century Gothic, sans-serif;
+      }
 
-        h1 {
-            margin-top: 50px;
-            color: #FFF1DC;
-        }
+      .container {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        height: 100vh;
+      }
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 50px;
-        }
+      .left-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-        .input-container {
-            margin-bottom: 5px;
-        }
+      .right-section {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      form{
+        margin-top: 5rem;
+      }
+      h1{
+        font-size: 45px;
+        letter-spacing: 6px;
+      }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
+      .input-container {
+        margin-top:1rem;
+        font-size: 25px;
+        display: flex;
+      }
 
-        input[type="text"],
-        select {
-            padding: 3px;
-            background-color: #D7C0AE;
-            color: #0E2954;
-            font-family: Century Gothic, sans-serif;
-        }
+      label {
+        margin-bottom: 10px;
+      }
 
-        .card {
-            background-color: #E6CBA8;
-            padding: 10px;
-            width: 200px;
-            margin-top: 25px;
-        }
+      input[type="text"],
+      select {
+        padding: 14px;
+        background-color: #d7c0ae;
+        color: #0e2954;
+        margin-left: 2rem;
+        font-family: Century Gothic, sans-serif;
+      }
 
-        #predictionResult {
-            margin-top: 25px;
-            text-align: center;
-        }
+      .card {
+        background-color: #e6cba8;
+        padding: 10px;
+        width: 200px;
+        margin-top: 25px;
+      }
+
+      #predictionResult {
+        text-align: center;
+        
+      }
+      /* Existing styles */
+
+      .container {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .left-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .right-section {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Additional styles */
+
+      .container {
+        flex-direction: row;
+        
+      }
+      .card {
+        padding: 2rem;
+      }
+      table,
+      th,
+      td {
+        margin-top: 2rem;
+        padding: 13px;
+        border: 2px solid black;
+        border-collapse: collapse;
+        color: black;
+      }
+      th {
+        font-weight: 700;
+      }
+
+      .left-section {
+        padding-right: 50px;
+      }
+
+      .right-section .card {
+        width: 400px;
+        height: 400px;
+        color: black;
+      }
+      #predictBtn{
+        margin-top: 2rem;
+        padding: 14px;
+        font-size: 20px;
+        font-weight: bold;
+        width: 178px; 
+    background-color: #e6cba8;
+border-radius: 15px; 
+transition: background-color 0.3s ease, color 0.3s ease; }
+
+#predictBtn:hover {
+  background-color: #dfdfdf; /* Background color on hover */
+  color: #080808; /* Text color on hover */
+}
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>FATIGUE PREDICTION</h1>
+    <form action="/predict" method="POST">
 
     <div class="container">
+      <div class="left-section">
         <div class="input-container">
-            <label for="heartRate">Heart Rate:</label>
-            <input type="text" name="hear_rate" required value="{{ hear_rate_value }}">
+          <label for="heartRate">Heart Rate:</label>
+          <input
+            type="text"
+            name="hear_rate"
+            required
+            value="{{ hear_rate_value }}"
+          />
         </div>
 
         <div class="input-container">
-            <label for="restingHeartRate">Resting Heart Rate:</label>
-            <input type="text" name="resting_heart" required value="{{ resting_heart_value }}">
+          <label for="restingHeartRate">Resting Heart Rate:</label>
+          <input
+            type="text"
+            name="resting_heart"
+            required
+            value="{{ resting_heart_value }}"
+          />
         </div>
 
         <div class="input-container">
-            <label for="bmi">BMI:</label>
-            <input type="text" name="BMI" step="0.01" required value="{{ BMI_value }}">
+          <label for="bmi">BMI:</label>
+          <input
+            type="text"
+            name="BMI"
+            step="0.01"
+            required
+            value="{{ BMI_value }}"
+          />
         </div>
 
         <div class="input-container">
-            <label for="calories">Calories:</label>
-            <input type="text" name="calories" required value="{{ calories_value }}">
+          <label for="calories">Calories:</label>
+          <input
+            type="text"
+            name="calories"
+            required
+            value="{{ calories_value }}"
+          />
         </div>
 
         <div class="input-container">
-            <label for="age">Age:</label>
-            <input type="text" name="age" required value="{{ age_value }}">
+          <label for="age">Age:</label>
+          <input type="text" name="age" required value="{{ age_value }}" />
         </div>
 
         <div class="input-container">
-            <label for="gender">Gender:</label>
-            <select name="gender">
-                <option value="0">Male</option>
-                <option value="1">Female</option>
-            </select>
+          <label for="gender">Gender:</label>
+          <select name="gender">
+            <option value="0">Male</option>
+            <option value="1">Female</option>
+          </select>
         </div>
+
+        <button type="submit" id="predictBtn">Predict</button>
+      </div>
+
+      <div class="right-section">
+        <div class="card">
+          <h2>Fatigue Risk Profile</h2>
+          <table bordered>
+            <thead>
+              <tr>
+                <th>Body Vitals</th>
+                <th>Values</th>
+                <th>Reference Range</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Heart Rate</td>
+                <td>{{ hear_rate_value }}</td>
+                <td>60-100 bpm</td>
+              </tr>
+              <tr>
+                <td>Resting Heart Rate</td>
+                <td>{{ resting_heart_value }}</td>
+                <td>50-70 bpm</td>
+              </tr>
+              <tr>
+                <td>BMI</td>
+                <td>{{ BMI_value }}</td>
+                <td>18.5-24.9</td>
+              </tr>
+              <tr>
+                <td>Calories</td>
+                <td>{{ calories_value }}</td>
+                <td>1500-2000 kcal</td>
+              </tr>
+            </tbody>
+          </table>
+          <div id="predictionResult" class="hidden">
+            <h2>Prediction Result: {{prediction_text}}</h2>
+            <p id="fasScore"></p>
+            <p id="fatigueLevel"></p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="card">
-        <p>Name: John Doe</p>
-    </div>
-
-    <button type="submit" id="predictBtn">Predict</button>
-
-    <div id="predictionResult" class="hidden">
-        <h2>Prediction Result: {{prediction_text}}</h2>
-        <p id="fasScore"></p>
-        <p id="fatigueLevel"></p>
-    </div>
-
-</body>
+   
+</form>
+  </body>
 </html>
