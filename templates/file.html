@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fatigue Prediction</title>
+
+
+</head>
+<body>
+    <h1>Fatigue Prediction</h1>
+    
+    <form action="/predict" method="POST">
+        <div class="input-container">
+            <label for="heartRate">Heart Rate:</label>
+            <input type="text" name="hear_rate" value="{{ hear_rate_value }}" >
+        </div>
+        
+        <div class="input-container">
+            <label for="restingHeartRate">Resting Heart Rate:</label>
+            <input type="text" name="resting_heart" value="{{ resting_heart_value }}" >
+        </div>
+        
+        <div class="input-container">
+            <label for="bmi">BMI:</label>
+            <input type="text" name="BMI" step="0.01" required value="{{ calories_value }}">
+        </div>
+        
+        <div class="input-container">
+            <label for="calories">Calories:</label>
+            <input type="text" name="calories" value="{{ calories_value }}" >
+        </div>
+        
+        <div class="input-container">
+            <label for="age">Age:</label>
+            <input type="text" name="age" value="{{ age_value }}" >
+        </div>
+        
+        <div class="input-container">
+            <label for="gender">Gender:</label>
+            <select name="gender">
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+            </select>
+        </div>
+        
+        <button type="submit" id="predictBtn">Predict</button>
+        
+        <div id="predictionResult" class="hidden">
+            <h2>Prediction Result: {{prediction_text}}</h2>
+            <p id="fasScore"></p>
+            <p id="fatigueLevel"></p>
+        </div>
+    </form>
+   
+</body>
+</html>
+
+
