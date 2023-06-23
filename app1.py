@@ -70,7 +70,7 @@ import numpy as np
 
 app = Flask(__name__)
 
-model = joblib.load("final_model.pkl")
+model = joblib.load("C:/Users/DELL/Desktop/Fatigue-Detection-Model/final_model.pkl")
 
 fatigue_levels = {
     0: "No Fatigue",
