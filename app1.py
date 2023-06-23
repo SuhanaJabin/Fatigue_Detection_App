@@ -70,7 +70,7 @@ import numpy as np
 
 app = Flask(__name__)
 
-model = joblib.load("C:/Users/DELL/Desktop/Fatigue-Detection-Model/final_model.pkl")
+model = joblib.load("C:/Users/DELL/Desktop/Fatigue-Detection-Model/best_model.pkl")
 
 fatigue_levels = {
     0: "No Fatigue",
@@ -90,12 +90,12 @@ def predict():
     calories = float(request.form.get('calories'))
     BMI = float(request.form.get('BMI'))
     resting_heart = float(request.form.get('resting_heart'))
-    age = float(request.form.get('age'))
-    gender_str = request.form.get('gender')
+    #age = float(request.form.get('age'))
+    #gender_str = request.form.get('gender')
 
-    gender = 0 if gender_str == '0' else 1
+    #gender = 0 if gender_str == '0' else 1
 
-    features = np.array([[hear_rate, calories, BMI, resting_heart, age, gender]])
+    features = np.array([[hear_rate, calories, BMI, resting_heart]])
     prediction = model.predict(features)
 
     output = round(prediction[0], 2)
@@ -109,8 +109,9 @@ def predict():
                            calories_value=calories,
                            BMI_value=BMI,
                            resting_heart_value=resting_heart,
-                           age_value=age,
-                           gender_value=gender_str)
+                           #age_value=age,
+                           #gender_value=gender_str)
+    )
 
 
 if __name__ == '__main__':
